@@ -1,6 +1,6 @@
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mario.isHittingTile(CollisionDirection.Left)) {
-        mario.vy = 0
+    if (mario.isHittingTile(CollisionDirection.Bottom)) {
+        mario.vy = -180
     } else {
         mario.vy = 0
     }
@@ -26,7 +26,7 @@ mario = sprites.create(img`
     . . . f f f f f f f f f f . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
-mario.ay = 200
+mario.ay = 500
 tiles.placeOnTile(mario, tiles.getTileLocation(2, 158))
 scene.cameraFollowSprite(mario)
 controller.moveSprite(mario, 200, 0)
