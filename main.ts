@@ -5,9 +5,9 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         Petronila.vy = 0
     }
 })
-sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     music.play(music.stringPlayable("C D E F G A B C5 ", 120), music.PlaybackMode.UntilDone)
-    sprites.destroy(sprite)
+    sprites.destroy(otherSprite)
     info.changeLifeBy(-1)
 })
 let malos: Sprite = null
@@ -66,5 +66,8 @@ game.onUpdateInterval(500, function () {
         `, SpriteKind.Enemy)
     malos.setScale(1.3, ScaleAnchor.Middle)
     tiles.placeOnRandomTile(malos, assets.tile`myTile2`)
+    if (malos.isHittingTile(CollisionDirection.Left)) {
+        sprites.destroy(malos, effects.disintegrate, 100)
+    }
     malos.setVelocity(-20, 0)
 })
