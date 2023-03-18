@@ -296,7 +296,7 @@ let fin = sprites.create(img`
     b b b b b b b b b b b b b b b b 
     . b b . . . . . . . . . . b b . 
     `, SpriteKind.win)
-fin.setPosition(3, 4)
+tiles.placeOnRandomTile(fin, assets.tile`myTile`)
 game.onUpdateInterval(2000, function () {
     bonos = sprites.create(img`
         ....................
