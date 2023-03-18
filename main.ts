@@ -72,7 +72,14 @@ let fantasma: Sprite = null
 let bonos: Sprite = null
 let piupiu: Sprite = null
 let Petronila: Sprite = null
-scene.setBackgroundColor(0)
+game.showLongText("Bienvenid@ a Petronila", DialogLayout.Bottom)
+game.showLongText("Los controles para poder jugar son...", DialogLayout.Bottom)
+game.showLongText("<- y -> para moverte de izquierda a derecha", DialogLayout.Bottom)
+game.showLongText("Flecha para arriba para saltar", DialogLayout.Bottom)
+game.showLongText("A y B para lanzar los proyectiles, el A para la derecha y el B para la izq", DialogLayout.Bottom)
+game.showLongText("Para poder completar el juego debes conseguir llegar hasta la cima", DialogLayout.Bottom)
+game.showLongText("Ready? Pulsa A para comenzar", DialogLayout.Bottom)
+music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
 tiles.setCurrentTilemap(tilemap`level1`)
 Petronila = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
