@@ -243,7 +243,6 @@ let malo_uni: Sprite = null
 let malos_cielo: Sprite = null
 let malos_del_suelo: Sprite = null
 let fantasma: Sprite = null
-let fin: Sprite = null
 let bonos: Sprite = null
 let piupiu: Sprite = null
 let Petronila: Sprite = null
@@ -279,6 +278,25 @@ tiles.placeOnTile(Petronila, tiles.getTileLocation(2, 158))
 scene.cameraFollowSprite(Petronila)
 controller.moveSprite(Petronila, 200, 0)
 info.setLife(3)
+let fin = sprites.create(img`
+    . . b b b b b b b b b b b b . . 
+    . b e 4 4 4 4 4 4 4 4 4 4 e b . 
+    b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+    b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+    b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+    b e e 4 4 4 4 4 4 4 4 4 4 e e b 
+    b e e e e e e e e e e e e e e b 
+    b e e e e e e e e e e e e e e b 
+    b b b b b b b d d b b b b b b b 
+    c b b b b b b c c b b b b b b c 
+    c c c c c c b c c b c c c c c c 
+    b e e e e e c b b c e e e e e b 
+    b e e e e e e e e e e e e e e b 
+    b c e e e e e e e e e e e e c b 
+    b b b b b b b b b b b b b b b b 
+    . b b . . . . . . . . . . b b . 
+    `, SpriteKind.win)
+fin.setPosition(3, 4)
 game.onUpdateInterval(2000, function () {
     bonos = sprites.create(img`
         ....................
@@ -304,27 +322,6 @@ game.onUpdateInterval(2000, function () {
         `, SpriteKind.Food)
     bonos.setScale(1.3, ScaleAnchor.Middle)
     bonos.setPosition(randint(0, 16), randint(0, 160))
-})
-forever(function () {
-    fin = sprites.create(img`
-        . . b b b b b b b b b b b b . . 
-        . b e 4 4 4 4 4 4 4 4 4 4 e b . 
-        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-        b e e 4 4 4 4 4 4 4 4 4 4 e e b 
-        b e e e e e e e e e e e e e e b 
-        b e e e e e e e e e e e e e e b 
-        b b b b b b b d d b b b b b b b 
-        c b b b b b b c c b b b b b b c 
-        c c c c c c b c c b c c c c c c 
-        b e e e e e c b b c e e e e e b 
-        b e e e e e e e e e e e e e e b 
-        b c e e e e e e e e e e e e c b 
-        b b b b b b b b b b b b b b b b 
-        . b b . . . . . . . . . . b b . 
-        `, SpriteKind.win)
-    fin.setPosition(3, 4)
 })
 game.onUpdateInterval(500, function () {
     fantasma = sprites.create(img`
@@ -356,8 +353,6 @@ game.onUpdateInterval(500, function () {
     fantasma.setScale(1.3, ScaleAnchor.Middle)
     tiles.placeOnRandomTile(fantasma, assets.tile`myTile2`)
     fantasma.setVelocity(-20, 0)
-})
-game.onUpdateInterval(500, function () {
     malos_del_suelo = sprites.create(img`
         . . . . f f f f f . . . . . . . 
         . . . f e e e e e f . . . . . . 
@@ -380,8 +375,6 @@ game.onUpdateInterval(500, function () {
     tiles.placeOnRandomTile(malos_del_suelo, assets.tile`myTile0`)
     tiles.placeOnRandomTile(malos_del_suelo, sprites.castle.tilePath5)
     malos_del_suelo.setVelocity(-20, 0)
-})
-game.onUpdateInterval(500, function () {
     malos_cielo = sprites.create(img`
         ............................................................cc.....
         ...........................................................ccc.....
@@ -458,8 +451,6 @@ game.onUpdateInterval(500, function () {
     tiles.placeOnRandomTile(malos_cielo, assets.tile`myTile3`)
     tiles.placeOnRandomTile(malos_cielo, assets.tile`myTile1`)
     malos_cielo.setVelocity(-20, 0)
-})
-game.onUpdateInterval(500, function () {
     malo_uni = sprites.create(img`
         .............ccfff..............
         ...........ccddbcf..............
