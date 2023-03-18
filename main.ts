@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const win = SpriteKind.create()
+}
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Petronila.isHittingTile(CollisionDirection.Bottom)) {
         Petronila.vy = -180
@@ -45,11 +48,183 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         `, Petronila, 200, 0)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.win, function (sprite, otherSprite) {
+    game.gameOver(true)
+    sprites.destroy(otherSprite)
+    sprites.destroy(sprite)
+    scene.setBackgroundImage(img`
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        ffffffffffffffff
+        `)
+    effects.confetti.startScreenEffect()
+    game.setGameOverMessage(true, "WIN!")
+})
 scene.onHitWall(SpriteKind.Enemy, function (sprite, location) {
     sprites.destroy(sprite)
 })
 scene.onHitWall(SpriteKind.Food, function (sprite, location) {
     sprites.destroy(sprite)
+})
+info.onLifeZero(function () {
+    game.gameOver(false)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
@@ -58,7 +233,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
-    info.changeScoreBy(1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
@@ -69,6 +243,7 @@ let malo_uni: Sprite = null
 let malos_cielo: Sprite = null
 let malos_del_suelo: Sprite = null
 let fantasma: Sprite = null
+let fin: Sprite = null
 let bonos: Sprite = null
 let piupiu: Sprite = null
 let Petronila: Sprite = null
@@ -129,6 +304,27 @@ game.onUpdateInterval(2000, function () {
         `, SpriteKind.Food)
     bonos.setScale(1.3, ScaleAnchor.Middle)
     bonos.setPosition(randint(0, 16), randint(0, 160))
+})
+forever(function () {
+    fin = sprites.create(img`
+        . . b b b b b b b b b b b b . . 
+        . b e 4 4 4 4 4 4 4 4 4 4 e b . 
+        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+        b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+        b e e 4 4 4 4 4 4 4 4 4 4 e e b 
+        b e e e e e e e e e e e e e e b 
+        b e e e e e e e e e e e e e e b 
+        b b b b b b b d d b b b b b b b 
+        c b b b b b b c c b b b b b b c 
+        c c c c c c b c c b c c c c c c 
+        b e e e e e c b b c e e e e e b 
+        b e e e e e e e e e e e e e e b 
+        b c e e e e e e e e e e e e c b 
+        b b b b b b b b b b b b b b b b 
+        . b b . . . . . . . . . . b b . 
+        `, SpriteKind.win)
+    fin.setPosition(3, 4)
 })
 game.onUpdateInterval(500, function () {
     fantasma = sprites.create(img`
